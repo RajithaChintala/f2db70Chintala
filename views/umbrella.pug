@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  - let umbrella=[{umb_color:"White",umb_cost:120,umb_size:"small"},{umb_color:"Black",umb_cost:110,umb_size:"medium"},{umb_color:"Yellow",umb_cost:150,umb_size:"large"}]
+  div(class="container-fluid")
+  div(class="row")
+   each u,v in umbrella
+    div(class="col-sm-2" onclick =`buy(${v})`) #{u.umb_color}, #{u.umb_cost}, #{u.umb_size}
+  script.
+    function buy(j)
+    {
+      alert(`You purchased Item ${j+1}`)
+    }
