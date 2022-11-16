@@ -1,0 +1,23 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null) 
+    h2 No instance to detail 
+ else 
+  - let umbid = toShow._id
+  - let umb_color = toShow.umb_color
+  - let umb_cost = toShow.umb_cost
+  - let umb_size = toShow.umb_size
+  div
+   div.row
+    div(class='umbrellaAttr mr-3') umbrella ID is:
+    div #{umbid}
+   div.row
+    div(class='umbrellaAttr mr-3') umbrella color is:
+    div #{umb_color}
+   div.row
+    div(class='umbrellaAttr mr-3') umbrella cost is:
+    div #{umb_cost}
+   div.row
+    div(class='umbrellaAttr mr-3') umbrella size is:
+    div #{umb_size}

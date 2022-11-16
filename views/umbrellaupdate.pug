@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if (toShow == null) 
+    h2 No instance to update 
+  else 
+   - let umbrellaid = toShow._id 
+   - let umb_color = toShow.umb_color 
+   - let umb_cost = toShow.umb_cost 
+   - let umb_size = toShow.umb_size 
+   
+   div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{umbrellaid} 
+   - let actionid = "/resource/umbrella/" + umbrellaid 
+   form(id='umbrellaForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.umbrellaAttr(for='umb_color') umbrella color 
+        input#umb_color(type='text', name='umb_color', value= umb_color ) 
+    div.form-group 
+        label.umbrellaAttr(for='umb_cost') umbrella cost 
+        input#umb_cost(type='number', name='umb_cost', value= umb_cost ) 
+    div.form-group 
+        label.umbrellaAttr(for='umb_size') umbrella size 
+        input#umb_size(type='text', name='umb_size', value= umb_size ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['umbrellaForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
