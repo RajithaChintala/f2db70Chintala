@@ -4,11 +4,14 @@ block content
   h1= title
   - let umbrella=results
   div(class="container-fluid")
-  div(class="row")
-   each u,v in umbrella
-    div(class="col-sm-2" onclick =`buy(${v})`) #{u.umb_color}, #{u.umb_cost}, #{u.umb_size}
+  div(class="row m-1")
+   each u in umbrella
+    - let destination = `dispatch(\"/umbrella/update?id=${u._id}\")`
+    div(class="row-sm-2" class="m-1") #{u.umb_color}, #{u.umb_cost}, #{u.umb_size}
+     button.btn( class="btn-primary ml-1", onclick= destination) Update
+
   script.
-    function buy(j)
-    {
-      alert(`You purchased Item ${j+1}`)
+    function dispatch(path){
+      window.location.href=path
     }
+  
