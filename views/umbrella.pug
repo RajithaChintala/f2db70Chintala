@@ -3,13 +3,18 @@ extends layout
 block content
   h1= title
   - let umbrella=results
+  - let create= `dispatch(\"/umbrella/create\")`
+  button.btn( class="btn-primary", onclick= create) Create
   div(class="container-fluid")
   div(class="row m-1")
    each u in umbrella
     - let destination = `dispatch(\"/umbrella/update?id=${u._id}\")`
+    - let d = `dispatch(\"/umbrella/detail?id=${u._id}\")`
+    - let d1 = `dispatch(\"/umbrella/delete?id=${u._id}\")`
     div(class="row-sm-2" class="m-1") #{u.umb_color}, #{u.umb_cost}, #{u.umb_size}
      button.btn( class="btn-primary ml-1", onclick= destination) Update
-
+     button.btn( class="btn-primary ml-1", onclick= d) View
+     button.btn( class="btn-primary ml-1", onclick= d1) delete
   script.
     function dispatch(path){
       window.location.href=path
